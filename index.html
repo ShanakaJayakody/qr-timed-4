@@ -322,17 +322,6 @@
         .calc-button.equals { 
             grid-row: span 2; /* Make equals button span two rows */
         }
-        .sr-only { /* For screen reader only text */
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
-        }
 
 
         @media (max-width: 768px) {
@@ -426,7 +415,7 @@
                 </div>
                 <div class="question-column">
                     <h4 class="text-md font-semibold mb-3 sticky top-0 bg-white pt-1 pb-1">Question <span id="question-number">1</span></h4>
-                    <p id="question-text" class="mb-4 text-black"></p>
+                    <p id="question-text" class="mb-4 text-gray-800"></p>
                     <div id="options-container" class="space-y-2"></div>
                     <div id="review-explanation-container"></div>
                 </div>
@@ -542,37 +531,37 @@
     <script>
         // --- Data ---
         const passages = [
-            // Stimulus for all questions: Garden Layout and Gardener Costs
-            `<p class="text-black mb-2">The diagram below shows the layout of four gardens in a suburban area.</p><img src="https://ik.imagekit.io/mwp/imaged?updatedAt=1746598046423" alt="Garden Layout Diagram" style="width:100%; max-width:495px; margin:auto; display:block; border: 1px solid #ddd; padding: 5px; background-color: #f9f9f9;"><p class="text-black text-center mt-2">Gardens A & B have the same dimensions and Garden C is a perfect square.</p>`
+            // Stimulus for all questions: Image of Box Net
+            `<p class="text-black mb-2">McBiscuits is producing a new box for their chocolate biscuits. The diagram below shows the dimensions of their new box.</p><img src="https://ik.imagekit.io/mwp/Screenshot%202025-05-07%20at%203.36.26%E2%80%AFPM.png?updatedAt=1746596197444" alt="Box Net Diagram" style="width:100%; max-width:661px; margin:auto; display:block; border: 1px solid #ddd; padding: 5px; background-color: #f9f9f9;"><p class="text-black text-center mt-2">It costs McBiscuits £0.15 to produce 6 biscuits.</p>`
         ];
         const questions = [
             { 
                 passageIndex: 0, 
-                text: "What will it cost to cut the grass which covers garden C?",
-                options: ["£27.36", "£22.82", "£19.58", "£18.92", "£31.68"], 
-                correctAnswer: "C", 
-                explanation: "Garden C is a perfect square. From the diagram, its side length is y = 9m. Area of Garden C = 9m * 9m = 81 m². Cost to cut grass = Area * Rate = 81 m² * £0.32/m² = £25.92. The closest option provided is £27.36 (Option A). This suggests the intended area for costing might be 27.36/0.32 = 85.5 m², or there's slight rounding in the question's design." 
-            },
-            { 
-                passageIndex: 0, 
-                text: "What will it cost to trim a hedge the length of y?", 
-                options: ["£16.20", "£16.40", "£16.60", "£16.80", "£17.20"], 
+                text: "What is the surface area of side A?",
+                options: ["294 cm²", "352 cm²", "277 cm²", "336 cm²", "321 cm²"], 
                 correctAnswer: "D", 
-                explanation: "The length of y is given in the diagram as 9m. The cost to trim a hedge is £1.80 per metre. Total cost = Length of y * Rate = 9m * £1.80/m = £16.20." 
+                explanation: 'Side A" refers to the front face of the box as shown in the diagram. Its dimensions are given as 28 cm (length) and 12 cm (height). The area of a rectangle is calculated by multiplying its length by its height. Area of Side A = 28 cm×12 cm=336 cm² . (The provided explanation in the image seems to be calculating the total surface area of the box, or the area of a net, rather than just side A. The question specifically asks for the surface area of "side A".)' 
             },
             { 
                 passageIndex: 0, 
-                text: "The owners of gardens A and B decide to equally split the cost of restoring the flower bed which lines the border between their two gardens. What will each of the owners pay?", 
-                options: ["£77", "£103", "£119", "£154", "£220"], 
-                correctAnswer: "A", 
-                explanation: "The border between gardens A and B is marked as length 'x' in the diagram, where x = 12m. The cost of restoring a flower bed is £7.00 per metre. Total cost for the border = Length x * Rate = 12m * £7.00/m = £84.00. If this cost is split equally between two owners, each owner pays £84.00 / 2 = £42.00. \nHowever, none of the options match £42.00. If we assume Option C (£119 per owner) is correct, the total cost would be £119 * 2 = £238. This would imply a flower bed length of £238 / £7.00/m = 34m. This suggests the dimension 'x' in the diagram might not be the sole length considered for this specific scenario." 
+                text: "What is the cost of producing side B using 3 mm cardboard?", 
+                options: ["£0.0045", "£0.0056", "£0.0061", "£0.0064", "£0.0067"], 
+                correctAnswer: "B", 
+                explanation: 'Side B is the top face of the box, with dimensions 28 cm (length) and 10 cm (width/depth). Area of Side B = 28 cm×10 cm=280 cm² . To calculate the cost, we convert this area to square metres: 280 cm² =280/10,000 m² =0.028 m² . The cost of 3 mm cardboard is £0.20 per m². Cost for Side B = 0.028 m² ×£0.20/m² =£0.0056.'
             },
             { 
                 passageIndex: 0, 
-                text: "The grass which covers garden B was cut after there had been heavy rain leaving it damp and the grass subsequently required a second cut the next day. If the gardener gave a 50% discount on the second cut as compensation, what was the total cost of both cuts?", 
-                options: ["£15.88", "£19.04", "£28.56", "£29.38", "£40.32"], 
+                text: "What price would McBiscuits need to sell 24 biscuits for in order to make a 43% profit, excluding box costs?", 
+                options: ["£0.34", "£0.64", "£0.86", "£1.03", "£1.15"], 
                 correctAnswer: "C", 
-                explanation: "Garden B has dimensions x=12m and z=16m. Area of Garden B = 12m * 16m = 192 m². Cost of one full grass cut = Area * Rate = 192 m² * £0.32/m² = £61.44. The second cut has a 50% discount, so it costs 0.50 * £61.44 = £30.72. Total cost for both cuts = £61.44 (first cut) + £30.72 (second cut) = £92.16. \nThis calculated value does not match any of the options. If we assume Option C (£28.56) is the correct total cost: Let C1 be the cost of the first cut. The total cost is C1 + 0.5*C1 = 1.5*C1. So, 1.5 * C1 = £28.56, which means C1 = £28.56 / 1.5 = £19.04. This would imply an area for Garden B of £19.04 / £0.32/m² = 59.5 m², which is inconsistent with the diagram dimensions. The question options appear to be based on a different area or cost structure than derived directly from the diagram and table for Garden B." 
+                explanation: 'First, determine the cost to produce one biscuit: £0.15 for 6 biscuits means each biscuit costs £0.15 / 6 = £0.025. Next, calculate the total production cost for 24 biscuits: 24×£0.025=£0.60. To make a 43% profit on this cost, the profit amount is 43% of £0.60: 0.43×£0.60=£0.258. The selling price is the cost plus the profit: £0.60+£0.258=£0.858. Rounding to the nearest penny, or matching the closest option, this is £0.86.' 
+            },
+            { 
+                passageIndex: 0, 
+                text: "What is the cost of producing the number of sides with area C required for 100 boxes using 5 mm thick cardboard?", 
+                options: ["£0.30", "£0.32", "£0.38", "£0.52", "£0.60"], 
+                correctAnswer: "E", 
+                explanation: 'Side C is a side face of the box with dimensions 12 cm (height) and 10 cm (width/depth). The area of one Side C is 12 cm×10 cm=120 cm² . Each box has two such sides (left and right), so the total area of C-type faces per box is 2×120 cm² =240 cm² . For 100 boxes, the total area required for these sides is 100×240 cm² =24,000 cm² . Converting this to square metres: 24,000 cm² /10,000 cm²/m² =2.4 m² . The cost of 5 mm thick cardboard is £0.25 per m². Therefore, the total cost is 2.4 m² ×£0.25/m² =£0.60.' 
             }
         ];
 
@@ -721,9 +710,7 @@
             const questionContainer = document.querySelector('.question-column');
             
             passageTextEl.innerHTML = passages[newPassageIndex]; 
-            // passageNumberEl.textContent = ''; // Clear passage number as it's a single stimulus
-            document.querySelector('.passage-column h3').innerHTML = `<span id="passage-number" class="sr-only">${newPassageIndex + 1}</span>`;
-
+            passageNumberEl.textContent = ''; // Clear passage number as it's a single stimulus
             currentlyDisplayedPassageIndex = newPassageIndex;
             if(passageContainer) passageContainer.scrollTop = 0;
             
